@@ -2,14 +2,19 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id("androidx.navigation.safeargs.kotlin")
+//    id 'org.jetbrains.kotlin.android.extensions'
+    //hilt setup
     id 'kotlin-kapt'
-    id 'org.jetbrains.kotlin.android.extensions'
+    id 'kotlin-parcelize'
+    id("dagger.hilt.android.plugin")
+    //to help parcelize domain model
+
 }
 
-
-androidExtensions {
-    experimental = true
-}
+//
+//androidExtensions {
+//    experimental = true
+//}
 
 android {
     compileSdk 31
@@ -88,5 +93,33 @@ dependencies {
     androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
 
     // Jetpack Compose Integration
-    implementation("androidx.navigation:navigation-compose:2.4.0-alpha06")
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha07")
+    implementation 'androidx.compose.runtime:runtime-livedata:1.1.0-alpha02'
+
+
+    // Hilt setup
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
+
+    //Retrofit setup
+    def retrofit_ver = "2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_ver"
+    //gson for retrofit
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_ver"
+
+    //volley setup
+    implementation("com.android.volley:volley:1.2.0")
+
+    //coroutine
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+
+    implementation 'androidx.ui:ui-foundation:0.1.0-dev03'
+
+
+
 }
+
+    // Allow references to generated code
+    kapt {
+        correctErrorTypes true
+    }
